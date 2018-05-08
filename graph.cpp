@@ -19,15 +19,22 @@ Graph::Graph(int rno, float rbudget) // constructor with two arguments represent
 {
 	number_of_nodes = rno;
 	initial_budget = rbudget;
+    
+   //Sets adjacency matrix values equal to false
+    for(int i=0;i<number_of_nodes;i++){
+        for(int j=0;j<number_of_nodes;j++)
+        adjMat[i][j]=0;
+        }
+    
+    }
 
-}
 void Graph::addEdge(int node1, int node2) // adds an edge between two nodes in the graph node1 and node2
 {
-
+    adjMat[node1][node2]=1;
 }
-void Graph::setValue(int node, float rval) // sets a value for a node
+void Graph::setValue(int node, float rval) // sets a value for
 {
-	
+    graph[node]= make_pair(false,rval);
 }
 void Graph::setBudget(float rbu) // sets the initial budget
 {
@@ -39,12 +46,23 @@ int Graph::getNSize() // return number of nodes
 }
 int Graph::getESize() // return number of edges
 {
+    int counter=0;
+    for(int i=0;i<number_of_nodes;i++){
+        for(int j=0;j<number_of_nodes;j++){
+            if (adjMat[i][j]== 1){
+                counter++;
+            }
+        }
+    }
+    return counter;
 }
 float Graph::getBudget() // return current budget
 {
+    return 0;
 }
 float Graph::getValue(int node) // returns the value of the node
 {
+    return graph[node].second;
 }
 void Graph::readData(string fileName)// reads data from a specified file
 {
@@ -77,10 +95,12 @@ void Graph::readData(string fileName)// reads data from a specified file
 } 
 int Graph::DFS(int startNode) //return the number of nodes visited using BFS starting at startNode and accumulating values at each node, as long as the budget remains positive
 {
+    return 0;
 }
 
-						// return the starting node that gives a longest DFS run before running out of budget
-						// if there are multiple nodes with the same DFS run length, return the smallest node
+// return the starting node that gives a longest DFS run before running out of budget
+// if there are multiple nodes with the same DFS run length, return the smallest node
 int Graph::bestStartVertex()
 {
+    return 0;
 }
