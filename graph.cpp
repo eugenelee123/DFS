@@ -34,7 +34,8 @@ void Graph::addEdge(int node1, int node2) // adds an edge between two nodes in t
 }
 void Graph::setValue(int node, float rval) // sets a value for
 {
-    graph[node]= make_pair(false,rval);
+    //Not an issue with pair, its an issue with the vector
+    graph.insert(graph.begin()+node,make_pair(false,rval));
 }
 void Graph::setBudget(float rbu) // sets the initial budget
 {
