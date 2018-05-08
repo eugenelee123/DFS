@@ -33,14 +33,18 @@ public:
 	void readData(string fileName); // reads data from a specified file
 	int DFS(int startNode); //return the number of nodes visited using BFS starting at startNode and accumulating values at each node, as long as the budget remains positive
 
-							// return the starting node that gives a longest DFS run before running out of budget
-							// if there are multiple nodes with the same DFS run length, return the smallest node
+    // return the starting node that gives a longest DFS run before running out of budget
+    // if there are multiple nodes with the same DFS run length, return the smallest node
 	int bestStartVertex();
 
 private:
 	// member variables and helper functions (if needed)
-	int number_of_nodes;
-	float initial_budget;
+	int number_of_nodes=0;
+	float initial_budget=0;
+    //Initializes adjacency matrix to maximum possible size
+    bool adjMat[100][100];
+    //Graph's vector location will be the node location, bool is to help with visited or not visited and floats are the values stored at each node
+    vector<pair<bool,float>> graph;
 };
 
 
