@@ -96,7 +96,20 @@ void Graph::readData(string fileName)// reads data from a specified file
 } 
 int Graph::DFS(int startNode) //return the number of nodes visited using BFS starting at startNode and accumulating values at each node, as long as the budget remains positive
 {
-    return 0;
+    stack<int> dfsStack;
+    for(int i=0;i<number_of_nodes;i++){
+        if (adjMat[startNode][i]==1){
+            //Push adjacent nodes onto the stack
+            dfsStack.push(i);
+            //Compare adjacent node values to find the smallest one
+            for(int j=0;j<number_of_nodes;j++){
+                
+            }
+            }
+        }
+    //Recursive call of DFS to the next node
+    DFS();
+    
 }
 
 // return the starting node that gives a longest DFS run before running out of budget
