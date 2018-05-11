@@ -12,13 +12,13 @@
 Graph::Graph() // default constructor
 {
 	number_of_nodes = 0;
-	initial_budget = 0;
+	budget = 0;
 }
 
 Graph::Graph(int rno, float rbudget) // constructor with two arguments representing the number of nodes, initial budget
 {
 	number_of_nodes = rno;
-	initial_budget = rbudget;
+	budget = rbudget;
     
    //Sets adjacency matrix values equal to false
     for(int i=0;i<number_of_nodes;i++){
@@ -31,6 +31,8 @@ Graph::Graph(int rno, float rbudget) // constructor with two arguments represent
 void Graph::addEdge(int node1, int node2) // adds an edge between two nodes in the graph node1 and node2
 {
     adjMat[node1][node2]=1;
+    adjMat[node2][node1]=1;
+    counter++;
 }
 void Graph::setValue(int node, float rval) // sets a value for
 {
@@ -39,7 +41,7 @@ void Graph::setValue(int node, float rval) // sets a value for
 }
 void Graph::setBudget(float rbu) // sets the initial budget
 {
-	initial_budget = rbu;
+	budget = rbu;
 }
 int Graph::getNSize() // return number of nodes
 {
@@ -47,19 +49,11 @@ int Graph::getNSize() // return number of nodes
 }
 int Graph::getESize() // return number of edges
 {
-    int counter=0;
-    for(int i=0;i<number_of_nodes;i++){
-        for(int j=0;j<number_of_nodes;j++){
-            if (adjMat[i][j]== 1){
-                counter++;
-            }
-        }
-    }
     return counter;
 }
 float Graph::getBudget() // return current budget
 {
-    return 0;
+    return budget;
 }
 float Graph::getValue(int node) // returns the value of the node
 {
@@ -94,22 +88,28 @@ void Graph::readData(string fileName)// reads data from a specified file
 		myfile.close();
 	}
 } 
-int Graph::DFS(int startNode) //return the number of nodes visited using BFS starting at startNode and accumulating values at each node, as long as the budget remains positive
+int Graph::DFS(int startNode) //return the number of nodes visited using DFS starting at startNode and accumulating values at each node, as long as the budget remains positive
 {
-    stack<int> dfsStack;
+    list<int> visited;
+    int num_visited=0;
     for(int i=0;i<number_of_nodes;i++){
-        if (adjMat[startNode][i]==1){
-            //Push adjacent nodes onto the stack
-            dfsStack.push(i);
-            //Compare adjacent node values to find the smallest one
-            for(int j=0;j<number_of_nodes;j++){
-                
+        //Pushes value of adjecent vertex onto visited stack
+        if ((adjMat[startNode][i]==1) && (graph[i].first==false)){
+            //Iterate through visited stack to see if node has already been visited, if it hasn't push it on
+            visited.push_back(i);
+            graph[i].first=true;
+            break;
             }
+            //Subtracts the budget by node's float value
+            budget = budget+graph[i].second;
             }
-        }
-    //Recursive call of DFS to the next node
-    DFS();
-    
+    //maybe loop until stack is empty
+    while( (budget>=0) || (visited.size()==number_of_nodes)){
+         num_visited++;
+    DFS(visited.front());
+        
+    }
+    return num_visited;
 }
 
 // return the starting node that gives a longest DFS run before running out of budget
