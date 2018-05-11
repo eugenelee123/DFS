@@ -15,6 +15,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <list>
 
 
 using namespace std;
@@ -40,11 +41,14 @@ public:
 private:
 	// member variables and helper functions (if needed)
 	int number_of_nodes=0;
-	float initial_budget=0;
+	float budget=0;
+    //counts number of edges
+    int counter =0;
     //Initializes adjacency matrix to maximum possible size
     bool adjMat[100][100];
     //Graph's vector location will be the node location, bool is to help with visited or not visited and floats are the values stored at each node
     vector<pair<bool,float>> graph;
+    
 };
 
 
