@@ -21,8 +21,8 @@ Graph::Graph(int rno, float rbudget) // constructor with two arguments represent
 	budget = rbudget;
     
    //Sets adjacency matrix values equal to false
-    for(int i=0;i<number_of_nodes;i++){
-        for(int j=0;j<number_of_nodes;j++)
+    for(int i=0;i< number_of_nodes; i++){
+        for(int j=0;j< number_of_nodes; j++)
         adjMat[i][j]=0;
         }
     
@@ -45,7 +45,10 @@ void Graph::setBudget(float rbu) // sets the initial budget
 }
 int Graph::getNSize() // return number of nodes
 {
-	return number_of_nodes;
+	if (graph.size() == 0)
+		return number_of_nodes;
+	else 	
+		return graph.size();
 }
 int Graph::getESize() // return number of edges
 {
@@ -93,7 +96,7 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
     list<int> visited;
     int num_visited=0;
     float Tempbudget= getBudget();
-    for(int i=0;i<number_of_nodes;i++){
+    for(int i=0;i< graph.size();i++){
         //Pushes value of adjecent vertex onto visited stack
         if ((adjMat[startNode][i]==1) && (graph[i].first==false)){
             //Iterate through visited stack to see if node has already been visited, if it hasn't push it on
