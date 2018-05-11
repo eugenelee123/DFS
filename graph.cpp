@@ -106,7 +106,7 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
         
             }
     //maybe loop until stack is empty
-    while( (DFSbudget>=0) || (visited.empty())){
+    while( (DFSbudget>=0) || (!visited.empty())){
          num_visited++;
          DFS(visited.front());
         
