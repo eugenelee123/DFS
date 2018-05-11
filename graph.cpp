@@ -45,7 +45,10 @@ void Graph::setBudget(float rbu) // sets the initial budget
 }
 int Graph::getNSize() // return number of nodes
 {
-	return number_of_nodes;
+	if(graph.size() == 0 )
+		return number_of_nodes;
+	else
+		return graph.size();
 }
 int Graph::getESize() // return number of edges
 {
