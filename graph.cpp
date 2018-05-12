@@ -93,26 +93,28 @@ void Graph::readData(string fileName)// reads data from a specified file
 } 
 int Graph::DFS(int startNode) //return the number of nodes visited using DFS starting at startNode and accumulating values at each node, as long as the budget remains positive
 {
-    float DFSbudget= budget;;
+    float DFSbudget= budget;
     //Visited stack
     stack<int> visited;
     //Number of nodes visited by DFS traversal
     int num_visited=0;
     visited.push(startNode);
-    while(DFSbudget>=0){
+    while(!visited.empty()){
         startNode=visited.top();
-	    visited.pop();
+        visited.pop();
         if(graph[startNode].first==false){
             graph[startNode].first=true;
             DFSbudget= DFSbudget - getValue(startNode);
             num_visited++;
-            for(int i =100; i>0; i--){
+            if(DFSbudget<=0){
+                return num_visited;
+            }
+            for(int i =99; i>0; i--){
                 if(adjMat[startNode][i]==1){
                     visited.push(i);
                 }
             }
         }
-        
     }
     return num_visited;
 }
