@@ -130,9 +130,12 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
 int Graph::bestStartVertex()
 {
     int max = -1;
+    int maxNode =0;
+	
     for(int i=0;i<100;i++){
-        if(DFS(i)>max){
-            max=DFS(i);
+        if(DFS(i)>maxNode){
+            max=i;
+ 	    maxNode=DFS(i);
         }
     }
     return max;
