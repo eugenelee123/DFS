@@ -99,8 +99,9 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
     //Number of nodes visited by DFS traversal
     int num_visited=0;
     visited.push(startNode);
-    while(!visited.empty()||DFSbudget>=0){
-        
+    while(DFSbudget>=0){
+        startNode=visited.top();
+	    visited.pop();
         if(graph[startNode].first==false){
             graph[startNode].first=true;
             DFSbudget= DFSbudget - getValue(startNode);
