@@ -105,7 +105,7 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
         if(graph[startNode].first==false){
             graph[startNode].first=true;
 	}
-            DFSbudget= DFSbudget - getValue(startNode);
+            DFSbudget= DFSbudget + getValue(startNode);
             num_visited++;
             if(DFSbudget<=0){
                 return num_visited;
