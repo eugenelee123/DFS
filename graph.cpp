@@ -97,13 +97,14 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
     //Visited stack
     stack<int> visited;
     //Number of nodes visited by DFS traversal
-    int num_visited=0;
+    int num_visited=1;
     visited.push(startNode);
     while(!visited.empty()){
         startNode=visited.top();
         visited.pop();
         if(graph[startNode].first==false){
             graph[startNode].first=true;
+	}
             DFSbudget= DFSbudget - getValue(startNode);
             num_visited++;
             if(DFSbudget<=0){
@@ -115,7 +116,6 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
                 }
             }
         }
-    }
     return num_visited;
 }
 
