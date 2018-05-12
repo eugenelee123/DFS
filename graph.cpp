@@ -98,19 +98,23 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
     stack<int> visited;
     //Number of nodes visited by DFS traversal
     int num_visited=0;
+    //Pushes startNode value onto stack
     visited.push(startNode);
     while(!visited.empty()){
+	//Sets value at the top of the stack as the start node for comparision
         startNode=visited.top();
+	//Removes value from stack
         visited.pop();
         if(graph[startNode].first==false){
             graph[startNode].first=true;
 		num_visited++;
-	
+	    //Update budget
             DFSbudget= DFSbudget + getValue(startNode);
-            
+            //If the budget is 0 or negative, it will return the amount of nodes visited
             if(DFSbudget<=0){
                 return num_visited;
             }
+	   //Pushes values onto stack in decreasing order so when pop() it will start from the smallest value
             for(int i =99; i>0; i--){
                 if(adjMat[startNode][i]==1){
                     visited.push(i);
@@ -126,7 +130,7 @@ int Graph::DFS(int startNode) //return the number of nodes visited using DFS sta
 int Graph::bestStartVertex()
 {
     int max = -1;
-    for(int i=0;i<getNSize();i++){
+    for(int i=0;i<100;i++){
         if(DFS(i)>max){
             max=DFS(i);
         }
